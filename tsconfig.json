@@ -8,6 +8,8 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
