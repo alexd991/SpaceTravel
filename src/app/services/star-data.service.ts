@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { ICelestialBody } from '../models/celestial-bodies/ICelestialBody';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,22 +9,22 @@ import { ICelestialBody } from '../models/celestial-bodies/ICelestialBody';
 export class StarDataService {
   constructor(private httpClient: HttpClient) { }
 
-  private apiUrl: string = 'https://localhost:7208/api/CelestialBody/';
+  private apiUrl: string = 'http://localhost:5000/api/CelestialBody/';
 
-  getAllBodies(): any{
+  getAllBodies(){
     return this.makeGetRequest(this.apiUrl + 'getAll');
   }
 
-  getById(bodyId: number): any {
+  getById(bodyId: number){
     return this.makeGetRequest(this.apiUrl + `getById/${bodyId}`);
 
   }
 
-  getAllPlanets(): any {
+  getAllPlanets(){
     return this.makeGetRequest(this.apiUrl + 'getByParentId/1');
   }
 
-  makeGetRequest(url: string){
+  makeGetRequest(url: string) : any{
     return this.httpClient.get<ICelestialBody[]>(url);
   }
 }

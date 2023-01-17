@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { ICelestialBody } from 'src/app/models/celestial-bodies/ICelestialBody';
 import { Planet } from 'src/app/models/celestial-bodies/planet';
@@ -12,6 +12,7 @@ import { StarDataService } from 'src/app/services/star-data.service';
 })
 export class DataDisplayComponent implements OnInit {
   celestialBodyData: ICelestialBody[] = [];
+  @ViewChild('model') planetModel: ElementRef;
   dataHasLoaded: boolean;
   currentlyShowingIndex: number = 0;
 
@@ -46,52 +47,13 @@ export class DataDisplayComponent implements OnInit {
           }
         });
         this.dataHasLoaded = true;
-      }));
-    if (!returned)
-      return;
-    // returned.forEach(body => {
-
-    // });
-    // this.starDataService.getAllBodies().subscribe((data: ICelestialBody[]) => {
-    //   data.forEach(body => {
-    //     switch (body.typeId) {
-    //       case 1:
-    //         this.celestialBodyData.push(new Star(
-    //           body.bodyId,
-    //           body.diameterKm,
-    //           body.distanceFromEarthAU,
-    //           body.description
-    //         ));
-    //         break;
-
-    //         case 2:
-    //           this.celestialBodyData.push(new Planet(
-    //             body.bodyId,
-    //             body.name,
-    //             body.diameterKm,
-    //             body.distanceFromEarthAU,
-    //             body.description
-    //           ));
-    //           break;
-
-    //       default:
-    //         break;
-    //     }
-    //   });
-    //   this.dataHasLoaded = true;
-    // });
+      })
+    );
   }
-
-  // ngAfterViewInit(): void {
-  //   setTimeout(() => {
-  //     x3dom.reload();
-  //   },1000);
-  // }
 
   cycle() {
     this.currentlyShowingIndex++;
     if (this.currentlyShowingIndex >= this.celestialBodyData.length)
       this.currentlyShowingIndex = 0;
   }
-
 }
