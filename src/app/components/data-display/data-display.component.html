@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col" *ngIf="true">
+        <ng-container class="col" *ngIf="true">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>{{celestialBodyData[currentlyShowingIndex].name}} </mat-card-title>
@@ -48,6 +48,6 @@
                     <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
                 </mat-card-actions>
             </mat-card>
-        </div>
+        </ng-container >
     </div>
 </div>

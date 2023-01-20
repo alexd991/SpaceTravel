@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { MatButtonModule} from '@angular/material/button';
@@ -11,12 +11,14 @@ import { DataDisplayComponent } from './components/data-display/data-display.com
 import { StarDataService } from './services/star-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataDisplayComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomepageComponent
     ],
   imports: [
     BrowserModule,
