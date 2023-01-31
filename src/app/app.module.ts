@@ -1,4 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router'
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { MatButtonModule} from '@angular/material/button';
@@ -14,6 +15,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { BasketComponent } from './components/basket/basket.component';
 
+const routes: Routes = [
+  { path: 'homepage', component: HomepageComponent },
+  { path: 'basket', component: BasketComponent },
+  { path: 'data-display', component: DataDisplayComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +31,7 @@ import { BasketComponent } from './components/basket/basket.component';
     ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -36,6 +44,9 @@ import { BasketComponent } from './components/basket/basket.component';
   ],
   bootstrap: [
     AppComponent
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class AppModule { }
