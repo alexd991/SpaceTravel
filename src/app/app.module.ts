@@ -12,13 +12,15 @@ import { StarDataService } from './services/star-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { BasketComponent } from './components/basket/basket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataDisplayComponent,
     NavbarComponent,
-    HomepageComponent
+    HomepageComponent,
+    BasketComponent
     ],
   imports: [
     BrowserModule,
