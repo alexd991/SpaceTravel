@@ -1,7 +1,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { ICelestialBody } from '../models/celestial-bodies/ICelestialBody';
-import { Observable } from 'rxjs';
+import { ICelestialBody } from '../models/ICelestialBody';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,7 @@
+import { BasketItem } from "../basket/basket-item";
 import { ICelestialBody } from "./ICelestialBody";
 
-export class Planet implements ICelestialBody {
+export class Planet implements ICelestialBody, BasketItem {
     bodyId: number;
     typeId: number = 2;
     name: string;

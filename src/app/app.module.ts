@@ -8,12 +8,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
-import { DataDisplayComponent } from './components/data-display/data-display.component';
+import { DataDisplayComponent } from './data-display/data-display.component';
 import { StarDataService } from './services/star-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { BasketComponent } from './components/basket/basket.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },

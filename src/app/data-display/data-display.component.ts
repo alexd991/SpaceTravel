@@ -1,8 +1,8 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { ICelestialBody } from 'src/app/models/celestial-bodies/ICelestialBody';
-import { Planet } from 'src/app/models/celestial-bodies/planet';
-import { Star } from 'src/app/models/celestial-bodies/star';
+import { ICelestialBody } from 'src/app/models/ICelestialBody';
+import { Planet } from 'src/app/models/planet';
+import { Star } from 'src/app/models/star';
 import { StarDataService } from 'src/app/services/star-data.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class DataDisplayComponent implements OnInit {
               break;
           }
         });
-        this.dataHasLoaded = true;
+        this.dataHasLoaded = !!returned;
       })
     );
   }
