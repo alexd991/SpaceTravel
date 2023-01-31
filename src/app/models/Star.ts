@@ -9,6 +9,7 @@ export class Star implements ICelestialBody, BasketItem {
     distanceFromEarthAU: number;
     parentBodyId: number | null = null;
     description: string;
+    price: number;
 
     constructor(bodyId: number,
         diameterKm: number,
@@ -18,6 +19,7 @@ export class Star implements ICelestialBody, BasketItem {
             this.diameterKm = diameterKm;
             this.distanceFromEarthAU = distanceFromEarthAU;
             this.description = description;
+            this.price = 250;
     }
     
     getBodyTypeAsString(): string {

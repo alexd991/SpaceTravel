@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { ICelestialBody } from 'src/app/models/ICelestialBody';
-import { Planet } from 'src/app/models/planet';
-import { Star } from 'src/app/models/star';
+import { Planet } from 'src/app/models/Planet';
+import { Star } from 'src/app/models/Star';
 import { StarDataService } from 'src/app/services/star-data.service';
 
 @Component({
@@ -12,14 +12,15 @@ import { StarDataService } from 'src/app/services/star-data.service';
 })
 export class DataDisplayComponent implements OnInit {
   celestialBodyData: ICelestialBody[] = [];
-  @ViewChild('model') planetModel: ElementRef;
+  @ViewChild('model') planetModel: ElementRef; 
   dataHasLoaded: boolean;
   currentlyShowingIndex: number = 0;
 
   constructor(private starDataService: StarDataService) { }
 
   async ngOnInit() {
-    const returned: ICelestialBody[] = await lastValueFrom(this.starDataService.getAllBodies()
+    this.dataHasLoaded = false;
+    await this.starDataService.getAllBodies()
       .subscribe((data: ICelestialBody[]) => {
         data.forEach(body => {
           switch (body.typeId) {
@@ -44,11 +45,11 @@ export class DataDisplayComponent implements OnInit {
 
             default:
               break;
-          }
+          };
+          
+          this.dataHasLoaded = true;
         });
-        this.dataHasLoaded = !!returned;
-      })
-    );
+      });
   }
 
   cycle() {

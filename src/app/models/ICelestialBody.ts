@@ -5,7 +5,7 @@ export interface ICelestialBody {
     diameterKm: number;
     distanceFromEarthAU: number;
     parentBodyId: number | null;
-    description: string | null;
+    description: string;
 
     getBodyTypeAsString() : string;
 }
