@@ -44,9 +44,9 @@
                     <p></p>
                 </mat-card-content>
 
-                <mat-card-actions>
+                <mat-card-actions class="data-actions">
                     <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
-                    <button mat-flat-button color="primary" type="button" (click)="cycle()">Add to basket</button>
+                    <button mat-flat-button color="primary" type="button" (click)="addToBasket(celestialBodyData[currentlyShowingIndex])">Add to basket</button>
                 </mat-card-actions>
             </mat-card>
         </ng-container >

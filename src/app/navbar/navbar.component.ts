@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent {
+  @Output() shouldShowBasket = new EventEmitter<boolean>();
+  private showBasket: boolean = false;
 
+  toggleBasket() {
+    this.showBasket = !this.showBasket;
+    this.shouldShowBasket.emit(this.showBasket);
+  }
 }

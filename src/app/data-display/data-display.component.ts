@@ -4,6 +4,8 @@ import { ICelestialBody } from 'src/app/data-display/models/ICelestialBody';
 import { Planet } from 'src/app/data-display/models/Planet';
 import { Star } from 'src/app/data-display/models/Star';
 import { StarDataService } from 'src/app/data-display/services/star-data.service';
+import { BasketItem } from '../basket/basket-item';
+import { BasketService } from '../basket/services/basket.service';
 
 @Component({
   selector: 'app-data-display',
@@ -16,7 +18,8 @@ export class DataDisplayComponent implements OnInit {
   dataHasLoaded: boolean;
   currentlyShowingIndex: number = 0;
 
-  constructor(private starDataService: StarDataService) { }
+  constructor(private starDataService: StarDataService,
+              private basketService: BasketService) { }
 
   async ngOnInit() {
     this.dataHasLoaded = false;
@@ -56,5 +59,9 @@ export class DataDisplayComponent implements OnInit {
     this.currentlyShowingIndex++;
     if (this.currentlyShowingIndex >= this.celestialBodyData.length)
       this.currentlyShowingIndex = 0;
+  }
+
+  addToBasket(basketItem: BasketItem){
+    this.basketService.addItemToBasket(basketItem);
   }
 }

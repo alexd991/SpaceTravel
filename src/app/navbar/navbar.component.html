@@ -3,10 +3,10 @@
         <img src="../../../assets/icons/space_logo.webp" alt="logo">
     </div>
     <div class="actions">
-        <button mat-icon-button type="button" disableRipple="true" routerLink="/homepage">
+        <button mat-icon-button type="button" disableRipple="true" routerLink="/data-display">
             <mat-icon>home</mat-icon>
         </button>
-        <button mat-icon-button type="button" disableRipple="true" routerLink="/basket">
+        <button mat-icon-button type="button" disableRipple="true" (click)="toggleBasket()">
             <mat-icon>shopping_basket</mat-icon>
         </button>
     </div>

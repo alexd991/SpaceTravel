@@ -1,36 +1,28 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Shopping Basket</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <table mat-table [dataSource]="itemsInBasket" class="table table-striped">
-                        <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef>Name</th>
-                            <td mat-cell *matCellDef="let item">{{item.name}}</td>
-                            <td mat-footer-cell *matFooterCellDef><strong>Total:</strong></td>
-                        </ng-container>
-                        <ng-container matColumnDef="price">
-                            <th mat-header-cell *matHeaderCellDef>Price</th>
-                            <td mat-cell *matCellDef="let item">{{item.price}}</td>
-                            <td mat-footer-cell *matFooterCellDef>{{totalPrice | currency:'GBP'}}</td>
-                        </ng-container>
-                        <ng-container matColumnDef="actions">
-                            <th mat-header-cell *matHeaderCellDef></th>
-                            <td mat-cell *matCellDef="let item">
-                                <button mat-icon-button><mat-icon>remove</mat-icon></button>
-                                <button mat-icon-button><mat-icon>add</mat-icon></button>
-                            </td>
-                            <td mat-footer-cell *matFooterCellDef></td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-                        <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
-                    </table>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-</div>
+<mat-sidenav-container id="basket"> 
+    <mat-sidenav mode="over" fixedInViewport="true"></mat-sidenav>
+    <mat-sidenav-content >
+        <mat-toolbar id="shopping-basket-bar">Shopping Basket</mat-toolbar>
+        <table mat-table [dataSource]="itemsInBasket" #basketTable id="shopping-basket-content">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let item">{{item.name}}</td>
+                <td mat-footer-cell *matFooterCellDef><strong>Total:</strong></td>
+            </ng-container>
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let item">{{item.price}}</td>
+                <td mat-footer-cell *matFooterCellDef>{{totalPrice | currency:'GBP'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button (click)="removeItemFromBasket(item)"><mat-icon>remove</mat-icon></button>
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+            <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+        </table>
+    </mat-sidenav-content>
+</mat-sidenav-container>

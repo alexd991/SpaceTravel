@@ -7,10 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppComponent } from './app.component';
 import { DataDisplayComponent } from './data-display/data-display.component';
 import { StarDataService } from './data-display/services/star-data.service';
+import { BasketService } from './basket/services/basket.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -40,10 +42,12 @@ const routes: Routes = [
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule
   ],
   providers: [ 
-    StarDataService
+    StarDataService,
+    BasketService
   ],
   bootstrap: [
     AppComponent
