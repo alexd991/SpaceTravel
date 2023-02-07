@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
 import { BasketItem } from './basket-item';
 
 class test implements BasketItem {
@@ -17,14 +18,21 @@ class test implements BasketItem {
   styleUrls: ['./basket.component.less']
 })
 export class BasketComponent {
-  public itemsInBasket: BasketItem[] = [
-    new test("mercury",100),
-    new test("mars",85),
-    new test("moon",69),
-    new test("sun",420),
-
-  ];
+  public columnsToDisplay: string[] = ['name', 'price', 'actions'];
+  public itemsInBasket: BasketItem[] = [];
   public totalPrice: number = 0;
+  
+  private allowMultiSelect = true;
+  private initialSelection = [];
+  public selection = new SelectionModel<BasketItem>(this.allowMultiSelect, this.initialSelection);
+
+  constructor() {
+    this.addItemToBasket(new test("Moon",50));
+    this.addItemToBasket(new test("Venus",80));
+    this.addItemToBasket(new test("Mercury",80));
+    this.addItemToBasket(new test("Sun",150));
+    this.addItemToBasket(new test("Earth",30));
+  }
   
   public addItemToBasket(item: BasketItem): void {
     this.itemsInBasket.push(item);
