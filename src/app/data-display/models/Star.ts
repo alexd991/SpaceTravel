@@ -1,30 +1,30 @@
-import { BasketItem } from "../basket/basket-item";
+import { BasketItem } from "../../basket/basket-item";
 import { ICelestialBody } from "./ICelestialBody";
 
-export class Planet implements ICelestialBody, BasketItem {
+export class Star implements ICelestialBody, BasketItem {
     bodyId: number;
-    typeId: number = 2;
-    name: string;
+    typeId: number = 1;
+    name: string = "Sun";
     diameterKm: number;
     distanceFromEarthAU: number;
-    parentBodyId: number = 1;
+    parentBodyId: number | null = null;
     description: string;
     price: number;
 
     constructor(bodyId: number,
-        name: string,
         diameterKm: number,
         distanceFromEarthAU: number,
         description: string) {
             this.bodyId = bodyId;
-            this.name = name;
             this.diameterKm = diameterKm;
             this.distanceFromEarthAU = distanceFromEarthAU;
             this.description = description;
-            this.price = 100;
+            this.price = 250;
     }
     
     getBodyTypeAsString(): string {
-        return "Planet";
+        return "Star";
     }
+
+
 }

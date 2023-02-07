@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import { ICelestialBody } from 'src/app/models/ICelestialBody';
-import { Planet } from 'src/app/models/Planet';
-import { Star } from 'src/app/models/Star';
-import { StarDataService } from 'src/app/services/star-data.service';
+import { lastValueFrom } from 'rxjs'; 
+import { ICelestialBody } from 'src/app/data-display/models/ICelestialBody';
+import { Planet } from 'src/app/data-display/models/Planet';
+import { Star } from 'src/app/data-display/models/Star';
+import { StarDataService } from 'src/app/data-display/services/star-data.service';
 
 @Component({
   selector: 'app-data-display',

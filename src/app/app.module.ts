@@ -9,13 +9,14 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { DataDisplayComponent } from './data-display/data-display.component';
-import { StarDataService } from './services/star-data.service';
+import { StarDataService } from './data-display/services/star-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'homepage', pathMatch: 'full'},
   { path: 'homepage', component: HomepageComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'data-display', component: DataDisplayComponent }
