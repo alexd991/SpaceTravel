@@ -1,5 +1,4 @@
 <app-navbar (shouldShowBasket)="showBasket=$event"></app-navbar>
 <!-- <app-data-display></app-data-display> -->
-<router-outlet>
-    <app-basket *ngIf="showBasket"></app-basket>
-</router-outlet>
+<app-basket *ngIf="showBasket"></app-basket>
+<router-outlet></router-outlet>
