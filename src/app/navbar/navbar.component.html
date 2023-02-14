@@ -1,13 +1,16 @@
-<mat-toolbar class="toolbar" color="primary">
-    <div class="logo">
-        <img src="../../../assets/icons/space_logo.webp" alt="logo">
-    </div>
-    <div class="actions">
-        <button mat-icon-button type="button" disableRipple="true" routerLink="/data-display">
-            <mat-icon>home</mat-icon>
-        </button>
-        <button mat-icon-button type="button" disableRipple="true" (click)="toggleBasket()">
-            <mat-icon>shopping_basket</mat-icon>
-        </button>
-    </div>
-  </mat-toolbar>
+<div class="toolbar-container">
+    <mat-toolbar class="toolbar upper">
+        <div class="logo">
+            <img src="../../../assets/icons/space_logo.webp" alt="logo">
+        </div>
+        <div class="actions">
+            <button mat-icon-button type="button" disableRipple="true" routerLink="/data-display">
+                <mat-icon>home</mat-icon>
+            </button>
+            <button mat-icon-button type="button" disableRipple="true" (click)="toggleBasket()">
+                <mat-icon>shopping_basket</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <mat-toolbar class="toolbar lower"></mat-toolbar>
+</div>

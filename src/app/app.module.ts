@@ -19,7 +19,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'homepage', pathMatch: 'full'},
+  { path: '', redirectTo: 'data-display', pathMatch: 'full'},
   { path: 'homepage', component: HomepageComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'data-display', component: DataDisplayComponent }

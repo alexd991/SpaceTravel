@@ -71,5 +71,6 @@ export class BasketComponent implements OnInit {
   public clearBasket() : void {
     this.itemsInBasket = [];
     this.totalPrice = 0;
+    this.table.renderRows();
   }
 }
