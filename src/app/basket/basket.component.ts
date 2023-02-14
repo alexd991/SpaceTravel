@@ -22,13 +22,7 @@ class test implements BasketItem {
 })
 export class BasketComponent implements OnInit {
   public columnsToDisplay: string[] = ['name', 'price', 'actions'];
-  public itemsInBasket: BasketItem[] = [
-    new test("Moon",50),
-    new test("Venus",80),
-    new test("Mercury",80),
-    new test("Sun",150),
-    new test("Earth",30)
-  ];
+  public itemsInBasket: BasketItem[] = [];
   public totalPrice: number = 0;
   private _subscriptions = new Subscription();
   
@@ -43,6 +37,7 @@ export class BasketComponent implements OnInit {
     this._subscriptions.add(basketService.addToBasket$().subscribe((item: BasketItem) => {
       this.addItemToBasket(item);
     }));
+    this.itemsInBasket = this.basketService.basketItems;
   }
 
   ngOnInit(): void {
@@ -53,12 +48,14 @@ export class BasketComponent implements OnInit {
     this.itemsInBasket.push(item);
     this.totalPrice += item.price;
     this.table.renderRows();
+    this.basketService.setBasketInStorage(this.itemsInBasket);
   }
 
   public removeItemFromBasket(item: BasketItem) : void {
     this.itemsInBasket.splice(this.itemsInBasket.indexOf(item), 1);
     this.totalPrice -= item.price;
     this.table.renderRows();
+    this.basketService.setBasketInStorage(this.itemsInBasket);
   }
 
   private sumBasket() : void {
@@ -72,5 +69,6 @@ export class BasketComponent implements OnInit {
     this.itemsInBasket = [];
     this.totalPrice = 0;
     this.table.renderRows();
+    this.basketService.clearBasketInStorage();
   }
 }
