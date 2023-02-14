@@ -1,21 +1,30 @@
 @import '../../styles.less';
 
+mat-sidenav-content{
+    width: 90%;
+}
+
 .basket {
-    position: fixed;
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 70;
     right: 0;
     width: 300px;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background-image: linear-gradient(to bottom, #132a43, #12344f, #103e5b, #0a4966, #005471);
 
     .shopping-basket-toolbar {
         display: flex;
         justify-content: center;
-        margin: 1rem 0 0 0;
-        padding-bottom: 5px;
+        align-items: center;
+        height: @toolbar-height * 0.75;
         color: white;
+
+        h4 {
+            margin: 0;
+        }
     }
 
     .shopping-basket-content {
@@ -23,14 +32,16 @@
         background-image: linear-gradient(to right,  #726CAE, #A89FE6, #726CAE), 
                           linear-gradient(to bottom, #726CAE, transparent), 
                           linear-gradient(to bottom, #726CAE, transparent);
-        border-radius: 1%;
+        border-radius: 0.75rem;
         background-size: 100% 5px, 5px 100%, 5px 100%;
         background-position: center top, left center, right center;
         background-repeat: no-repeat;
+        background-clip: border-box;
 
-        table {
+        .shopping-basket-table {
             background-color: @toolbar-lower;
             td, th, tr {
+                text-align: center;
                 color:white;
             }
         }

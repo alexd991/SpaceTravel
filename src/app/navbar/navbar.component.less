@@ -6,19 +6,19 @@
 
         &.upper{
             background-color: @toolbar-upper;
-            height: calc(@toolbar-height/2);
+            height: @toolbar-height * 0.5;
             justify-content: space-between;
         }
  
         &.lower{
             background-color: @toolbar-lower;
-            height: calc(@toolbar-height/2);
+            height: @toolbar-height * 0.5;
         }
     }
 
     .logo {
         z-index: 1;
-        margin-top: calc(@toolbar-height/2);
+        margin-top: @toolbar-height * 0.5;
         img {
             height: 60px;
         }
@@ -27,7 +27,7 @@
     .actions {
         z-index: 1;
         color: #fff;
-        margin-top: calc(@toolbar-height/2);
+        margin-top: @toolbar-height * 0.5;
     
         button {
 
