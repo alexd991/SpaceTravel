@@ -10,6 +10,7 @@ export class Star implements ICelestialBody, BasketItem {
     parentBodyId: number | null = null;
     description: string;
     price: number;
+    imageUrl: string;
 
     constructor(bodyId: number,
         diameterKm: number,
@@ -20,6 +21,7 @@ export class Star implements ICelestialBody, BasketItem {
             this.distanceFromEarthAU = distanceFromEarthAU;
             this.description = description;
             this.price = 250;
+            this.imageUrl = `http://ad41storage.blob.core.windows.net/planet-images/2k_${this.name.toLowerCase()}.jpg`;
     }
     
     getBodyTypeAsString(): string {

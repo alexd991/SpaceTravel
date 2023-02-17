@@ -6,6 +6,7 @@ export interface ICelestialBody {
     distanceFromEarthAU: number;
     parentBodyId: number | null;
     description: string;
+    imageUrl: string | null;
 
     getBodyTypeAsString() : string;
 }

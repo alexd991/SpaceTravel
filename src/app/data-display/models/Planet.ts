@@ -10,6 +10,7 @@ export class Planet implements ICelestialBody, BasketItem {
     parentBodyId: number = 1;
     description: string;
     price: number;
+    imageUrl: string;
 
     constructor(bodyId: number,
         name: string,
@@ -22,6 +23,7 @@ export class Planet implements ICelestialBody, BasketItem {
             this.distanceFromEarthAU = distanceFromEarthAU;
             this.description = description;
             this.price = 100;
+            this.imageUrl = `http://ad41storage.blob.core.windows.net/planet-images/2k_${this.name.toLowerCase()}.jpg`;
     }
     
     getBodyTypeAsString(): string {

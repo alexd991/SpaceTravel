@@ -8,7 +8,7 @@
                 </mat-card-header>
 
                 <mat-card-content id="model" #model>
-                    <ng-container *ngIf="dataHasLoaded; else errorLoading">
+                    <ng-container *ngIf="dataHasLoaded && x3dHasLoaded; else errorLoading">
                         <x3d height="500px" #planetModel>
                             <scene>
                                 <background backUrl='../../../assets/images/2k_stars.jpg'></background>
@@ -21,7 +21,7 @@
                                             <material diffuseColor='1 1 1'></material>
                                             <!-- <ImageTexture url="../../../assets/images/2k_{{celestialBodyData[currentlyShowingIndex].name.toLowerCase()}}.jpg"></ImageTexture> -->
                                             <ImageTexture
-                                                url="http://ad41storage.blob.core.windows.net/planet-images/2k_{{celestialBodyData[currentlyShowingIndex]?.name.toLowerCase()}}.jpg">
+                                                url="{{celestialBodyData[currentlyShowingIndex]?.imageUrl}}">
                                             </ImageTexture>
                                         </appearance>
                                         <sphere radius="1"></sphere>
