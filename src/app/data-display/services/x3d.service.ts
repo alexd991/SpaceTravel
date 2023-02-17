@@ -19,8 +19,8 @@ export class X3DService {
     return this.x3d.canvases.length > 0;
   }
 
-  reloadX3D() {
-    this.x3d.reload();
+  async reloadX3D() {
+    setTimeout(this.x3d.reload(), 10);
   }
 
 

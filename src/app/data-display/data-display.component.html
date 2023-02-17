@@ -50,22 +50,22 @@
                     </ng-template>
                 </mat-card-content>
 
-                <mat-card-content>
+                <mat-card-content *ngIf="dataHasLoaded && x3dHasLoaded">
                     <p>{{celestialBodyData[currentlyShowingIndex]?.description}}</p>
                     <h2>Distance from Earth: {{celestialBodyData[currentlyShowingIndex]?.distanceFromEarthAU}} A.U.</h2>
                     <h3>Diameter: {{celestialBodyData[currentlyShowingIndex]?.diameterKm}} km</h3>
                 </mat-card-content>
 
                 <mat-card-actions class="data-actions">
-                    <ng-container *ngIf="dataHasLoaded; else errorLoading">
+                    <ng-container *ngIf="dataHasLoaded && x3dHasLoaded; else refreshButton">
                         <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
                         <button mat-flat-button color="primary" type="button"
                             (click)="addToBasket(celestialBodyData[currentlyShowingIndex])">Add to basket</button>
                         <button mat-flat-button color="primary" type="button"
                             (click)="rerenderX3D()">Redraw</button>
                     </ng-container>
-                    <<ng-template #errorLoading>
-                        <button mat-flat-button color="warning" type="button" (click)="rerenderX3D()">Refresh content</button>
+                    <ng-template #refreshButton>
+                        <button mat-flat-button color="accent" type="button" (click)="rerenderX3D()">Refresh content</button>
                         </ng-template>
                 </mat-card-actions>
             </mat-card>

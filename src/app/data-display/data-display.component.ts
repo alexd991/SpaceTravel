@@ -12,7 +12,7 @@ import { X3DService } from './services/x3d.service';
   styleUrls: ['./data-display.component.less']
 })
 export class DataDisplayComponent implements OnInit, AfterViewInit {
-  celestialBodyData: ICelestialBody[] = [];
+  celestialBodyData: ICelestialBody[];
   @ViewChild('planetModel') planetModel: ElementRef; 
   x3dHasLoaded: boolean;
   dataHasLoaded: boolean;
@@ -24,28 +24,32 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     this.dataHasLoaded = false;
-    this.x3dHasLoaded = this.x3dService.x3dHasLoaded;
-    console.log(this.x3dHasLoaded);
+    this.x3dHasLoaded = false;
 
+    await this.loadData();
+  }
+
+  async loadData() {
+    this.celestialBodyData = [];
     await this.starDataService.getAllBodies()
-      .subscribe((data: ICelestialBody[]) => {
-        data.forEach(body => {
-          switch (body.typeId) {
-            case 1:
-              this.celestialBodyData.push(new Star(body.bodyId, body.diameterKm, 
-                body.distanceFromEarthAU, body.description));
-              break;
-            case 2:
-              this.celestialBodyData.push(new Planet(body.bodyId, body.name, body.diameterKm, 
-                body.distanceFromEarthAU, body.description));
-              break;
-            default:
-              break;
-          };
-        });
-        this.dataHasLoaded = this.celestialBodyData.length > 0;
-        console.log("dataHasLoaded: ", this.dataHasLoaded);
+    .subscribe((data: ICelestialBody[]) => {
+      data.forEach(body => {
+        switch (body.typeId) {
+          case 1:
+            this.celestialBodyData.push(new Star(body.bodyId, body.diameterKm, 
+              body.distanceFromEarthAU, body.description));
+            break;
+          case 2:
+            this.celestialBodyData.push(new Planet(body.bodyId, body.name, body.diameterKm, 
+              body.distanceFromEarthAU, body.description));
+            break;
+          default:
+            break;
+        };
       });
+      this.dataHasLoaded = this.celestialBodyData.length > 0;
+    });
+    this.x3dHasLoaded = !!this.x3dService.x3d;
   }
 
   cycle() {
@@ -59,12 +63,17 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(!this.x3dService.x3dHasCanvases)
-      this.x3dService.reloadX3D();
+    if(!this.x3dHasLoaded || !this.x3dService.x3dHasCanvases)
+      this.rerenderX3D();
   }
 
-  rerenderX3D() {
-    this.x3dService.reloadX3D();
+  async rerenderX3D() {
+    if(!this.dataHasLoaded)
+      await this.loadData();
+      
+    await this.x3dService.reloadX3D();
+    const imageTextureElement: HTMLElement = this.planetModel?.nativeElement.querySelector('imagetexture');
+    imageTextureElement?.setAttribute('url',`${this.celestialBodyData[this.currentlyShowingIndex].imageUrl}`);
   }
 
 }
