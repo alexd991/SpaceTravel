@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 export class BasketService {
 
   private _addToBasketSubject = new Subject<BasketItem>();
+  public basketVisible: boolean = false;
   public basketItems: BasketItem[];
 
   constructor() {
@@ -25,6 +26,10 @@ export class BasketService {
 
   clearBasketInStorage() : void {
     localStorage.removeItem('basketItems');
+  }
+
+  toggleBasket() {
+    this.basketVisible = !this.basketVisible;
   }
 
   addItemToBasket(item: BasketItem) {

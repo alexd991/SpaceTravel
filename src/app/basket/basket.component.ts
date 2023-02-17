@@ -1,26 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 // import { SelectionModel } from '@angular/cdk/collections';
 import { BasketItem } from './basket-item';
 import { MatTable } from '@angular/material/table';
 import { BasketService } from './services/basket.service';
 import { Subscription } from 'rxjs';
 
-class test implements BasketItem {
-  name: string = "test";
-  price: number = 0;
-
-  constructor(name: string, price: number) {
-    this.name = name;
-    this.price = price;
-  }
-}
-
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.less']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit, OnDestroy {
   public columnsToDisplay: string[] = ['name', 'price', 'actions'];
   public itemsInBasket: BasketItem[] = [];
   public totalPrice: number = 0;
@@ -47,6 +37,7 @@ export class BasketComponent implements OnInit {
   public addItemToBasket(item: BasketItem): void {
     this.itemsInBasket.push(item);
     this.totalPrice += item.price;
+    console.log(this.itemsInBasket);
     this.table.renderRows();
     this.basketService.setBasketInStorage(this.itemsInBasket);
   }
@@ -70,5 +61,9 @@ export class BasketComponent implements OnInit {
     this.totalPrice = 0;
     this.table.renderRows();
     this.basketService.clearBasketInStorage();
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
   }
 }

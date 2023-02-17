@@ -10,10 +10,14 @@ import { BasketItem } from './basket/basket-item';
 })
 export class AppComponent {
   title = 'SpaceTravel';
-  @Input() showBasket: boolean = false;
-  private _subscriptions = new Subscription();
 
-  constructor(private basketService: BasketService) {
-    
+  constructor(private basketService: BasketService) {}
+
+  toggleBasket() {
+    this.basketService.toggleBasket();
+  }
+
+  public get showBasket(): boolean {
+    return this.basketService.basketVisible;
   }
 }
