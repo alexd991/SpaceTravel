@@ -5,7 +5,7 @@
             <h4>Shopping Basket</h4>
         </div>
         <div class="shopping-basket-content">
-            <table mat-table [dataSource]="itemsInBasket" class="shopping-basket-table">
+            <table mat-table [dataSource]="itemsInBasket" #basketTable class="shopping-basket-table">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef>Name</th>
                     <td mat-cell *matCellDef="let item">{{item.name}}</td>

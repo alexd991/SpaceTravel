@@ -18,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BasketComponent } from './basket/basket.component';
 
+import * as X3Dom from 'x3dom';
+
 const routes: Routes = [
   { path: '', redirectTo: 'data-display', pathMatch: 'full'},
   { path: 'homepage', component: HomepageComponent },
@@ -47,7 +49,8 @@ const routes: Routes = [
   ],
   providers: [ 
     StarDataService,
-    BasketService
+    BasketService,
+    { provide: X3Dom, useValue: X3Dom }
   ],
   bootstrap: [
     AppComponent

@@ -33,7 +33,9 @@
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/x3dom/x3dom.js"
+            ]
           },
           "configurations": {
             "production": {

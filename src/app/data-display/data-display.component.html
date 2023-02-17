@@ -1,54 +1,85 @@
 <div class="container">
     <div class="row">
-        <ng-container class="col" *ngIf="true">
+        <ng-container class="col" *ngIf="dataHasLoaded">
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>{{celestialBodyData[currentlyShowingIndex].name}} </mat-card-title>
-                    <mat-card-subtitle>{{celestialBodyData[currentlyShowingIndex].getBodyTypeAsString()}}</mat-card-subtitle>
+                    <mat-card-title>{{celestialBodyData[currentlyShowingIndex]?.name}} </mat-card-title>
+                    <mat-card-subtitle>{{celestialBodyData[currentlyShowingIndex]?.getBodyTypeAsString()}}</mat-card-subtitle>
                 </mat-card-header>
 
-                <mat-card-content id="model" #model >
-                    <x3d height="500px">
-                        <scene>
-                            <background backUrl='../../../assets/images/2k_stars.jpg'></background>
-                            <viewpoint position='0 0 2.75'>
-                                <pointlight intensity='0.5' location='0 0 3'></pointlight>
-                            </viewpoint>
-                            <transform id="rotation" rotation='0.055818 0.998143 0 0.055818'>
-                                <shape>
-                                    <appearance>
-                                        <material diffuseColor='1 1 1'></material>
-                                        <!-- <ImageTexture url="../../../assets/images/2k_{{celestialBodyData[currentlyShowingIndex].name.toLowerCase()}}.jpg"></ImageTexture> -->
-                                        <ImageTexture
-                                            url="http://ad41storage.blob.core.windows.net/planet-images/2k_{{celestialBodyData[currentlyShowingIndex].name.toLowerCase()}}.jpg">
-                                        </ImageTexture>
-                                    </appearance>
-                                    <sphere radius="1"></sphere>
-                                </shape>
-                                <timesensor id="timer" cycleInterval="75" loop="true"></timesensor>
-                                <orientationinterpolator id="interp" key="0 0.5 1"
-                                    keyValue="0 1 0 0 0 1 0 3.14 0 1 0 6.28"></orientationinterpolator>
-                                <route fromNode='timer' fromField='fraction_changed' toNode='interp'
-                                    toField='set_fraction'></route>
-                                <route fromNode='interp' fromField='value_changed' toNode='rotation' toField='rotation'>
-                                </route>
-                            </transform>
-                        </scene>
-                    </x3d>
+                <mat-card-content id="model" #model>
+                    <ng-container *ngIf="dataHasLoaded; else errorLoading">
+                        <x3d height="500px" #planetModel>
+                            <scene>
+                                <background backUrl='../../../assets/images/2k_stars.jpg'></background>
+                                <viewpoint position='0 0 2.75'>
+                                    <pointlight intensity='0.5' location='0 0 3'></pointlight>
+                                </viewpoint>
+                                <transform id="rotation" rotation='0.055818 0.998143 0 0.055818'>
+                                    <shape>
+                                        <appearance>
+                                            <material diffuseColor='1 1 1'></material>
+                                            <!-- <ImageTexture url="../../../assets/images/2k_{{celestialBodyData[currentlyShowingIndex].name.toLowerCase()}}.jpg"></ImageTexture> -->
+                                            <ImageTexture
+                                                url="http://ad41storage.blob.core.windows.net/planet-images/2k_{{celestialBodyData[currentlyShowingIndex]?.name.toLowerCase()}}.jpg">
+                                            </ImageTexture>
+                                        </appearance>
+                                        <sphere radius="1"></sphere>
+                                    </shape>
+                                    <timesensor id="timer" cycleInterval="75" loop="true"></timesensor>
+                                    <orientationinterpolator id="interp" key="0 0.5 1"
+                                        keyValue="0 1 0 0 0 1 0 3.14 0 1 0 6.28"></orientationinterpolator>
+                                    <route fromNode='timer' fromField='fraction_changed' toNode='interp'
+                                        toField='set_fraction'></route>
+                                    <route fromNode='interp' fromField='value_changed' toNode='rotation'
+                                        toField='rotation'>
+                                    </route>
+                                </transform>
+                            </scene>
+                        </x3d>
+                    </ng-container>
+                    <ng-template #errorLoading>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Error loading data</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p>There was an error loading the data. Please try again later.</p>
+                            </mat-card-content>
+                        </mat-card>
+                    </ng-template>
                 </mat-card-content>
 
                 <mat-card-content>
-                    <p>{{celestialBodyData[currentlyShowingIndex].description}}</p>
-                    <h2>Distance from Earth: {{celestialBodyData[currentlyShowingIndex].distanceFromEarthAU}} A.U.</h2>
-                    <h3>Diameter: {{celestialBodyData[currentlyShowingIndex].diameterKm}} km</h3>
-                    <p></p>
+                    <p>{{celestialBodyData[currentlyShowingIndex]?.description}}</p>
+                    <h2>Distance from Earth: {{celestialBodyData[currentlyShowingIndex]?.distanceFromEarthAU}} A.U.</h2>
+                    <h3>Diameter: {{celestialBodyData[currentlyShowingIndex]?.diameterKm}} km</h3>
                 </mat-card-content>
 
                 <mat-card-actions class="data-actions">
-                    <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
-                    <button mat-flat-button color="primary" type="button" (click)="addToBasket(celestialBodyData[currentlyShowingIndex])">Add to basket</button>
+                    <ng-container *ngIf="dataHasLoaded; else errorLoading">
+                        <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
+                        <button mat-flat-button color="primary" type="button"
+                            (click)="addToBasket(celestialBodyData[currentlyShowingIndex])">Add to basket</button>
+                        <button mat-flat-button color="primary" type="button"
+                            (click)="rerenderX3D()">Redraw</button>
+                    </ng-container>
+                    <<ng-template #errorLoading>
+                        <button mat-flat-button color="warning" type="button" (click)="rerenderX3D()">Refresh content</button>
+                        </ng-template>
                 </mat-card-actions>
             </mat-card>
         </ng-container>
+
+        <ng-template #errorLoading>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Error loading data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>There was an error loading the data. Please try again later.</p>
+                </mat-card-content>
+            </mat-card>
+        </ng-template>
     </div>
 </div>
