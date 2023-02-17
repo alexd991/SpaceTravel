@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BasketItem } from '../basket-item';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
 
-  private _addToBasketSubject = new Subject<BasketItem>();
+  private _addToBasketSubject = new ReplaySubject<BasketItem>(1);
   public basketVisible: boolean = false;
   public basketItems: BasketItem[];
 
