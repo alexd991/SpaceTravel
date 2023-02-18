@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, HostListener } from '@angular/core';
 import { BasketService } from './basket/services/basket.service';
-import { BasketItem } from './basket/basket-item';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +17,12 @@ export class AppComponent {
 
   public get showBasket(): boolean {
     return this.basketService.basketVisible;
+  }
+
+  @HostListener('mouseup')
+  public onMouseUp() {
+    const basket = document.querySelector('.basket');
+    if (basket)
+      this.basketService.toggleBasket();
   }
 }

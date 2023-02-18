@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 // import { SelectionModel } from '@angular/cdk/collections';
 import { BasketItem } from './basket-item';
 import { MatTable } from '@angular/material/table';
@@ -67,6 +67,8 @@ export class BasketComponent implements OnInit, AfterViewInit, OnDestroy {
       this.addItemToBasket(item);
     }));
   }
+
+  
 
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
