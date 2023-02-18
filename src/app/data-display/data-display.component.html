@@ -1,14 +1,19 @@
 <div class="container">
     <div class="row">
-        <ng-container class="col" *ngIf="dataHasLoaded">
+        <ng-container class="col" *ngIf="dataHasLoaded; else errorLoadingData">
             <mat-card>
-                <mat-card-header>
+                <mat-card-header *ngIf="x3dHasLoaded; else test">
                     <mat-card-title>{{celestialBodyData[currentlyShowingIndex]?.name}} </mat-card-title>
                     <mat-card-subtitle>{{celestialBodyData[currentlyShowingIndex]?.getBodyTypeAsString()}}</mat-card-subtitle>
                 </mat-card-header>
 
-                <mat-card-content id="model" #model>
-                    <ng-container *ngIf="dataHasLoaded && x3dHasLoaded; else errorLoading">
+                <ng-template #test>
+                    <mat-card-title>Test</mat-card-title>
+                    <mat-card-subtitle>Test</mat-card-subtitle>
+                </ng-template>
+
+                <mat-card-content id="model">
+                    <ng-container *ngIf="x3dHasLoaded">
                         <x3d height="500px" #planetModel>
                             <scene>
                                 <background backUrl='../../../assets/images/2k_stars.jpg'></background>
@@ -38,47 +43,38 @@
                             </scene>
                         </x3d>
                     </ng-container>
-                    <ng-template #errorLoading>
-                        <mat-card>
-                            <mat-card-header>
-                                <mat-card-title>Error loading data</mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <p>There was an error loading the data. Please try again later.</p>
-                            </mat-card-content>
-                        </mat-card>
-                    </ng-template>
                 </mat-card-content>
 
-                <mat-card-content *ngIf="dataHasLoaded && x3dHasLoaded">
+                <mat-card-content *ngIf="x3dHasLoaded">
                     <p>{{celestialBodyData[currentlyShowingIndex]?.description}}</p>
                     <h2>Distance from Earth: {{celestialBodyData[currentlyShowingIndex]?.distanceFromEarthAU}} A.U.</h2>
                     <h3>Diameter: {{celestialBodyData[currentlyShowingIndex]?.diameterKm}} km</h3>
                 </mat-card-content>
 
-                <mat-card-actions class="data-actions">
-                    <ng-container *ngIf="dataHasLoaded && x3dHasLoaded; else refreshButton">
-                        <button mat-flat-button color="primary" type="button" (click)="cycle()">Cycle through</button>
+                <mat-card-actions class="data-actions" *ngIf="x3dHasLoaded; else redraw">
+                    <ng-container *ngIf="modelHasLoaded; else redraw">
+                        <button mat-flat-button color="primary" type="button" (click)="cycleThroughBodies()">Cycle through</button>
                         <button mat-flat-button color="primary" type="button"
                             (click)="addToBasket(celestialBodyData[currentlyShowingIndex])">Add to basket</button>
-                        <button mat-flat-button color="primary" type="button"
-                            (click)="rerenderX3D()">Redraw</button>
                     </ng-container>
-                    <ng-template #refreshButton>
-                        <button mat-flat-button color="accent" type="button" (click)="rerenderX3D()">Refresh content</button>
-                        </ng-template>
+                    <ng-template #redraw>
+                        <button mat-flat-button color="primary" type="button" (click)="rerenderX3D()">Redraw</button>
+                    </ng-template>
                 </mat-card-actions>
             </mat-card>
         </ng-container>
 
-        <ng-template #errorLoading>
+        <ng-template #errorLoadingData>
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Error loading data</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>There was an error loading the data. Please try again later.</p>
+                    <p>There was an error loading the data. Please click refersh button, or reload the page.</p>
                 </mat-card-content>
+                <mat-card-actions>
+                    <button mat-flat-button color="accent" type="button" (click)="rerenderX3D()">Refresh content</button>
+                </mat-card-actions>
             </mat-card>
         </ng-template>
     </div>

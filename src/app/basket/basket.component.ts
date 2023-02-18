@@ -68,8 +68,6 @@ export class BasketComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
-  
-
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }
