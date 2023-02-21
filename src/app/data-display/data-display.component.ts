@@ -21,8 +21,7 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
 
   constructor(private starDataService: StarDataService,
     private basketService: BasketService,
-    private x3dService: X3DService,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private x3dService: X3DService) { }
 
   async ngOnInit() {
     this.dataHasLoaded = false;
@@ -37,30 +36,27 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
     this.celestialBodyData = [];
 
     await this.starDataService.getAllBodies()
-      .subscribe((data: ICelestialBody[]) => {
-        data.forEach(body => {
-
-          switch (body.typeId) {
-            case 1:
-              this.celestialBodyData.push(new Star(body.bodyId, body.diameterKm,
-                body.distanceFromEarthAU, body.description));
-              break;
-            case 2:
-              this.celestialBodyData.push(new Planet(body.bodyId, body.name, body.diameterKm,
-                body.distanceFromEarthAU, body.description));
-              break;
-            default:
-              break;
-          };
-        });
-        this.dataHasLoaded = this.celestialBodyData.length > 0;
+    .subscribe((data: ICelestialBody[]) => {
+      data.forEach(body => {
+        switch (body.typeId) {
+          case 1:
+            this.celestialBodyData.push(new Star(body.bodyId, body.diameterKm,
+              body.distanceFromEarthAU, body.description));
+            break;
+          case 2:
+            this.celestialBodyData.push(new Planet(body.bodyId, body.name, body.diameterKm,
+              body.distanceFromEarthAU, body.description));
+            break;
+          default:
+            break;
+        };
       });
+      this.dataHasLoaded = this.celestialBodyData.length > 0;
+    });
   }
-  
-  
+
   async ngAfterViewInit() {
     await this.rerenderX3D();
-    console.log(this.planetModel?.nativeElement);
   }
 
   async rerenderX3D() {
@@ -76,7 +72,7 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
 
   addToBasket(basketItem: BasketItem) {
     if(!this.basketService.basketVisible)
-    this.basketService.toggleBasket();
+      this.basketService.toggleBasket();
     this.basketService.addItemToBasket(basketItem);
   }
   

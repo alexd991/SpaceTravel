@@ -8,7 +8,7 @@ import { ICelestialBody } from '../models/ICelestialBody';
 export class StarDataService {
   constructor(private httpClient: HttpClient) { }
 
-  private apiUrl: string = 'http://localhost:5000/api/CelestialBody/';
+  private apiUrl: string = 'https://ad-space-api.azurewebsites.net/api/celestialbody/';
 
   getAllBodies(){
     return this.makeGetRequest(this.apiUrl + 'getAll');

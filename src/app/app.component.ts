@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { BasketService } from './basket/services/basket.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { BasketService } from './basket/services/basket.service';
 })
 export class AppComponent {
   title = 'SpaceTravel';
+
+  @ViewChild('basket', {static: false, read: ElementRef}) basket: ElementRef;
 
   constructor(private basketService: BasketService) {}
 
@@ -19,10 +21,14 @@ export class AppComponent {
     return this.basketService.basketVisible;
   }
 
-  @HostListener('mouseup')
-  public onMouseUp() {
-    const basket = document.querySelector('.basket');
-    if (basket)
-      this.basketService.toggleBasket();
+  @HostListener('document:mouseup', ['$event.target'])
+  onMouseUp(clickedElement: HTMLElement) {
+    if(this.basket == null)
+      return;
+
+    if(this.basket.nativeElement.contains(clickedElement))
+      return;
+
+    this.basketService.toggleBasket();
   }
 }
