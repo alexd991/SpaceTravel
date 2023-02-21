@@ -9,13 +9,10 @@ import { BasketService } from './basket/services/basket.service';
 export class AppComponent {
   title = 'SpaceTravel';
 
+  @ViewChild('navbar', {static: true, read: ElementRef}) navbar: ElementRef;
   @ViewChild('basket', {static: false, read: ElementRef}) basket: ElementRef;
 
   constructor(private basketService: BasketService) {}
-
-  toggleBasket() {
-    this.basketService.toggleBasket();
-  }
 
   public get showBasket(): boolean {
     return this.basketService.basketVisible;
@@ -26,9 +23,9 @@ export class AppComponent {
     if(this.basket == null)
       return;
 
-    if(this.basket.nativeElement.contains(clickedElement))
+    if(this.basket.nativeElement.contains(clickedElement) || this.navbar.nativeElement.querySelector('.basket').contains(clickedElement))
       return;
 
-    this.basketService.toggleBasket();
+    this.basketService.toggleBasket(false);
   }
 }

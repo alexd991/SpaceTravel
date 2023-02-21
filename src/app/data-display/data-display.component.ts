@@ -72,7 +72,7 @@ export class DataDisplayComponent implements OnInit, AfterViewInit {
 
   addToBasket(basketItem: BasketItem) {
     if(!this.basketService.basketVisible)
-      this.basketService.toggleBasket();
+      this.basketService.toggleBasket(true);
     this.basketService.addItemToBasket(basketItem);
   }
   
