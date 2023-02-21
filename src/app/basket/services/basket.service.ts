@@ -29,7 +29,6 @@ export class BasketService {
   }
 
   toggleBasket(isVisible: boolean) {
-    console.log("howdy");
     this.basketVisible =isVisible;
   }
 
