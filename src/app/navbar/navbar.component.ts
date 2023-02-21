@@ -10,6 +10,6 @@ export class NavbarComponent{
   constructor(private basketService: BasketService) {}
 
   toggleBasket() {
-    this.basketService.toggleBasket();
+    this.basketService.toggleBasket(!this.basketService.basketVisible);
   }
 }

@@ -28,8 +28,8 @@ export class BasketService {
     localStorage.removeItem('basketItems');
   }
 
-  toggleBasket() {
-    this.basketVisible = !this.basketVisible;
+  toggleBasket(isVisible: boolean) {
+    this.basketVisible =isVisible;
   }
 
   addItemToBasket(item: BasketItem) {

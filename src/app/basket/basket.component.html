@@ -2,7 +2,7 @@
     <mat-sidenav mode="over" fixedInViewport="false"></mat-sidenav>
     <mat-sidenav-content>
         <div class="shopping-basket-toolbar">
-            <h4>Shopping Basket</h4>
+            <h4>Basket</h4>
         </div>
         <div class="shopping-basket-content">
             <table mat-table [dataSource]="itemsInBasket" #basketTable class="shopping-basket-table">
@@ -19,7 +19,7 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> </th>
                     <td mat-cell *matCellDef="let item">
-                        <button mat-icon-button (click)="removeItemFromBasket(item)"><mat-icon>remove</mat-icon></button>
+                        <button mat-icon-button class="remove-item" (click)="removeItemFromBasket(item)"><mat-icon>remove</mat-icon></button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>

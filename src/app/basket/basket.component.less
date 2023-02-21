@@ -1,6 +1,6 @@
 @import '../../styles.less';
 
-mat-sidenav-content{
+mat-sidenav-content {
     width: 90%;
 }
 
@@ -13,7 +13,7 @@ mat-sidenav-content{
     right: 0;
     width: 300px;
     border-radius: 0.5rem;
-    background-image: linear-gradient(to bottom, #132a43, #12344f, #103e5b, #0a4966, #005471);
+    background-image: linear-gradient(to bottom, @dark-blue, @light-blue);
 
     .shopping-basket-toolbar {
         display: flex;
@@ -29,9 +29,9 @@ mat-sidenav-content{
 
     .shopping-basket-content {
         padding: 5px 5px 0 5px;
-        background-image: linear-gradient(to right,  #726CAE, #A89FE6, #726CAE), 
-                          linear-gradient(to bottom, #726CAE, transparent), 
-                          linear-gradient(to bottom, #726CAE, transparent);
+        background-image: linear-gradient(to right, @dark-purple, @light-purple, @dark-purple),
+            linear-gradient(to bottom, @dark-purple, transparent),
+            linear-gradient(to bottom, @dark-purple, transparent);
         border-radius: 0.25rem;
         background-size: 100% 5px, 5px 100%, 5px 100%;
         background-position: center top, left center, right center;
@@ -39,10 +39,11 @@ mat-sidenav-content{
         background-clip: border-box;
 
         .shopping-basket-table {
-            background-color: @toolbar-lower;
+            background-color: @light-blue;
+
             td, th, tr {
                 text-align: center;
-                color:white;
+                color: white;
             }
         }
     }
